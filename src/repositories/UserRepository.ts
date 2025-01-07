@@ -1,4 +1,4 @@
-import db from '../config/db';
+import db from "../config/db";
 
 // Prepare the statement for inserting data into the test table
 const insert = await db.prepareAsync(
