@@ -17,17 +17,17 @@ const Option = ({title, onPress}: OptionProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     borderRadius: SIZES.roundedFull,
     borderWidth: 1,
-    borderColor: COLORS.black,
-    width : "70%",
+    borderColor: COLORS.gray,
+    width : "75%",
   },
   text: {
     fontSize: SIZES.textLg,
-    textAlign: 'center',
+    textAlign: 'right',
     color: "black",
     paddingVertical: "2%",
+    paddingRight : "5%",
   },
 });
 

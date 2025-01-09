@@ -1,55 +1,94 @@
-import React, { useMemo } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import {COLORS , SIZES} from "@constants/index";
-import {Option} from "@components/howDidYouHear";
-import {ListRenderer} from "@components/utils";
+import React from 'react';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  TouchableOpacity, 
+  SafeAreaView,
+  Image 
+} from 'react-native';
+import { COLORS, SIZES, FONTS, Images } from '@constants/index';
+import { useRouter } from 'expo-router';
 
-
-
-export default function index() {
-    const data = useMemo(() => [
-        { title: 'من خلال الصحافة', onPress: () => {} },
-        { title: 'من خلال الإعلانات', onPress: () => {} },
-        { title: 'من خلال الصحافة', onPress: () => {} },
-        { title: 'من خلال الصحافة', onPress: () => {} },
-        { title: 'من خلال الصحافة', onPress: () => {} },
-        { title: 'من خلال الإعلانات', onPress: () => {} },
-      ], []);
+const index = () => {
+  const router = useRouter();
 
   return (
-    <View style={styles.container}>
-        <Text style = {styles.header}>كيف سمعت عن المفردات؟</Text>
-
-        <View style={styles.optionsContainer}>
-            {data.map((item, index) => (
-                <Option key={index} title={item.title} onPress={item.onPress} />
-            ))}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <View style={styles.imageContainer}>
+          <Image 
+            source={require('../../assets/abecedaire.jpg')}  
+            style={styles.heroImage}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>طور قاموسك اللغوي في دقيقة في اليوم</Text>
+          <Text style={styles.subtitle}>
+            تعلم أكثر من 10,000 كلمة جديدة مع عادة يومية جديدة لا تستغرق سوى دقيقة واحدة
+          </Text>
         </View>
 
-    </View>
+        <TouchableOpacity 
+          style={styles.startButton}
+          onPress={() => router.push('howDidYouHear')}
+        >
+          <Text style={styles.buttonText}>هيا نبدأ</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.primary,
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: COLORS.primary,
   },
-    header: {
-        flex: 1,
-        fontSize: SIZES.text3xl,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        width: '70%',
-        marginTop: "10%",
-    },
-    optionsContainer: {
-        color: "white",
-        width: "100%",
-        alignItems: 'center',
-        flex: 20,
-        gap: "4%",
-    },
-
+  content: {
+    flex: 1,
+    padding: SIZES.spaceLg,
+    justifyContent: 'space-between',
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: SIZES.spaceLg,
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+    maxHeight: 300,
+  },
+  textContainer: {
+    alignItems: 'center',
+    marginVertical: SIZES.spaceXl,
+  },
+  title: {
+    ...FONTS.heading1,
+    textAlign: 'center',
+    color: COLORS.black,
+    marginBottom: SIZES.spaceMd,
+  },
+  subtitle: {
+    ...FONTS.bodySm,
+    textAlign: 'center',
+    color: COLORS.secondary,
+    marginBottom: SIZES.spaceLg,
+  },
+  startButton: {
+    backgroundColor: '#A5C9CA',
+    paddingVertical: SIZES.spaceMd,
+    borderRadius: SIZES.roundedLg,
+    alignItems: 'center',
+    marginBottom: SIZES.spaceLg,
+  },
+  buttonText: {
+    ...FONTS.heading3,
+    color: COLORS.white,
+  },
 });
+
+export default index;

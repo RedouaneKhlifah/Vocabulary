@@ -10,21 +10,21 @@ import { useRouter } from 'expo-router';
 
 export default function HowDidYouHear() {
     const router = useRouter();
+    
     const data = useMemo(() => [
-      { title: 'تيك توك', onPress: () => {} },
-      { title: 'إنستغرام', onPress: () => {} },
-      { title: 'فيسبوك', onPress: () => {} },
-      { title: 'جوجل بلاي', onPress: () => {} },
-      { title: 'البحث على الويب', onPress: () => {} },
-      { title: 'صديق/عائلة', onPress: () => {} },
-      { title: 'آخر', onPress: () => {} },
-    ], []);
+        { title: '١٣ إلى ١٧', onPress: () => {} },
+        { title: '١٨ إلى ٢٤', onPress: () => {} },
+        { title: '٢٥ إلى ٣٤', onPress: () => {} },
+        { title: '٣٥ إلى ٤٤', onPress: () => {} },
+        { title: '٤٥ إلى ٥٤', onPress: () => {} },
+        { title: '٥٥ فما فوق', onPress: () => {} },
+      ], []);       
 
   return (
     <View style={styles.container}>
         <Skip onPress={() => router.push('howOldAreYou') }/>
-        <Text style = {styles.header}>كيف سمعت عن المفردات؟</Text>
-        <Text style = {styles.subHeader}>حدد خيارًا للمتابعة</Text>
+        <Text style = {styles.header}>ما هو عمرك</Text>
+        <Text style = {styles.subHeader}>سيتم استخدام عمرك لتخصيص المحتوى بحيث يتناسب معك</Text>
         <View style={styles.optionsContainer}>
             {data.map((item, index) => (
                 <Option key={index} title={item.title} onPress={item.onPress} />
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     subHeader: {
+        flex: 1,
         fontSize: SIZES.textXl,
         fontWeight: '500',
         textAlign: 'center',
