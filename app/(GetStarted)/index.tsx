@@ -1,28 +1,33 @@
 import React from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  TouchableOpacity, 
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
   SafeAreaView,
-  Image 
+  Image,
+  Platform,
+  Dimensions
 } from 'react-native';
-import { COLORS, SIZES, FONTS, Images } from '@constants/index';
+import { COLORS, SIZES, FONTS } from '@constants/index';
 import { useRouter } from 'expo-router';
 
-const index = () => {
+const { width, height } = Dimensions.get('window');
+
+const WelcomeScreen = () => {
   const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.imageContainer}>
-          <Image 
-            source={require('../../assets/abecedaire.jpg')}  
+          <Image
+            source={require('../../assets/abecedaire.jpg')}
             style={styles.heroImage}
             resizeMode="contain"
           />
         </View>
+
         <View style={styles.textContainer}>
           <Text style={styles.title}>طور قاموسك اللغوي في دقيقة في اليوم</Text>
           <Text style={styles.subtitle}>
@@ -30,9 +35,10 @@ const index = () => {
           </Text>
         </View>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.startButton}
           onPress={() => router.push('howDidYouHear')}
+          activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>هيا نبدأ</Text>
         </TouchableOpacity>
@@ -52,43 +58,56 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   imageContainer: {
-    flex: 1,
+    height: height * 0.4,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: SIZES.spaceLg,
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
   },
   heroImage: {
-    width: '100%',
+    width: width * 2,
     height: '100%',
-    maxHeight: 300,
+    alignSelf: 'center',
   },
   textContainer: {
     alignItems: 'center',
-    marginVertical: SIZES.spaceXl,
+    paddingHorizontal: SIZES.spaceMd,
+    marginTop: SIZES.space3xl,
   },
   title: {
     ...FONTS.heading1,
     textAlign: 'center',
     color: COLORS.black,
     marginBottom: SIZES.spaceMd,
+    writingDirection: 'rtl',
   },
   subtitle: {
     ...FONTS.bodySm,
     textAlign: 'center',
     color: COLORS.secondary,
     marginBottom: SIZES.spaceLg,
+    writingDirection: 'rtl',
   },
   startButton: {
-    backgroundColor: '#A5C9CA',
+    backgroundColor: '#93C1C1',
     paddingVertical: SIZES.spaceMd,
     borderRadius: SIZES.roundedLg,
     alignItems: 'center',
-    marginBottom: SIZES.spaceLg,
+    marginTop: 'auto',
+    marginBottom: Platform.OS === 'ios' ? SIZES.spaceLg : SIZES.spaceXl,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   buttonText: {
     ...FONTS.heading3,
     color: COLORS.white,
+    writingDirection: 'rtl',
   },
 });
 
-export default index;
+export default WelcomeScreen;

@@ -8,7 +8,7 @@ interface SkipProps {
 const Skip: React.FC<SkipProps> = ({title =  'تخطي', onPress}) => {
     return (
         <TouchableOpacity style = {styles.container} onPress={onPress}>
-            <Text style = {{color : COLORS.black}}> {title}</Text>
+            <Text style={{ color: COLORS.black, fontSize: 16 }}> {title}</Text>
             
         </TouchableOpacity>
     )

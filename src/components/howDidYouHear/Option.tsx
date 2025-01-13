@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.roundedFull,
     borderWidth: 1,
     borderColor: COLORS.gray,
-    width : "75%",
+    width : "90%",
   },
   text: {
     fontSize: SIZES.textLg,
     textAlign: 'right',
     color: "black",
-    paddingVertical: "2%",
-    paddingRight : "5%",
+    paddingVertical: "4%",
+    paddingRight : "6.5%",
   },
 });
 

@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
         color: "white",
         width: "100%",
         alignItems: 'center',
-        flex: 20,
-        gap: "4%",
+        flex: 1,
+        gap: "2.5%",
     },
 
 });

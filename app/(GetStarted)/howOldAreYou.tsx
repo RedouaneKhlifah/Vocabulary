@@ -22,8 +22,8 @@ export default function HowDidYouHear() {
 
   return (
     <View style={styles.container}>
-        <Skip onPress={() => router.push('howOldAreYou') }/>
-        <Text style = {styles.header}>ما هو عمرك</Text>
+        <Skip onPress={() => router.push('whichOptionYou') }/>
+        <Text style = {styles.header}>ما هو عمرك؟</Text>
         <Text style = {styles.subHeader}>سيتم استخدام عمرك لتخصيص المحتوى بحيث يتناسب معك</Text>
         <View style={styles.optionsContainer}>
             {data.map((item, index) => (
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         fontSize: SIZES.text3xl,
         fontWeight: "bold",
         textAlign: 'center',
-        width: '70%',
+        width: '100%',
         marginTop: 20,
     },
     subHeader: {
@@ -53,15 +53,15 @@ const styles = StyleSheet.create({
         fontSize: SIZES.textXl,
         fontWeight: '500',
         textAlign: 'center',
-        width: '60%',
+        width: '90%',
         marginBottom: 10,
     },
     optionsContainer: {
         color: "white",
         width: "100%",
         alignItems: 'center',
-        flex: 20,
-        gap: "4%",
+        flex: 10,
+        gap: "2.5%",
     },
 
 });
