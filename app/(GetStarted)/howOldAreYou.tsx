@@ -5,29 +5,39 @@ import {Option} from "@components/howDidYouHear";
 import {ListRenderer} from "@components/utils";
 import Skip from '@components/utils/Skip';
 import { useRouter } from 'expo-router';
+import { IUser } from '@/interfaces';
+import useStorage from '@/hooks/useStorage';
 
 
 
 export default function HowDidYouHear() {
     const router = useRouter();
+    const {getItem , saveItem} = useStorage()
     
     const data = useMemo(() => [
-        { title: '١٣ إلى ١٧', onPress: () => {} },
-        { title: '١٨ إلى ٢٤', onPress: () => {} },
-        { title: '٢٥ إلى ٣٤', onPress: () => {} },
-        { title: '٣٥ إلى ٤٤', onPress: () => {} },
-        { title: '٤٥ إلى ٥٤', onPress: () => {} },
-        { title: '٥٥ فما فوق', onPress: () => {} },
+        { title: '١٣ إلى ١٧', value : '13-17' },
+        { title: '١٨ إلى ٢٤', value : '18-24' },
+        { title: '٢٥ إلى ٣٤', value : '25-34' },
+        { title: '٣٥ إلى ٤٤', value : '35-44' },
+        { title: '٤٥ إلى ٥٤', value : '45-54' },
+        { title: '٥٥ فما فوق', value : '55+' },
       ], []);       
+
+      const handlePress = async (value: string) => {
+        const userData = await getItem("userForm") as IUser
+        saveItem("userForm" , {...userData , ageGroup : value} as IUser)
+        router.push('whichGenderAreYou');
+      };
+  
 
   return (
     <View style={styles.container}>
-        <Skip onPress={() => router.push('whichOptionYou') }/>
+        <Skip onPress={() => router.push('whichGenderAreYou') }/>
         <Text style = {styles.header}>ما هو عمرك؟</Text>
         <Text style = {styles.subHeader}>سيتم استخدام عمرك لتخصيص المحتوى بحيث يتناسب معك</Text>
         <View style={styles.optionsContainer}>
             {data.map((item, index) => (
-                <Option key={index} title={item.title} onPress={item.onPress} />
+                <Option key={index} title={item.title} onPress={()=>handlePress(item.value)} />
             ))}
         </View>
 

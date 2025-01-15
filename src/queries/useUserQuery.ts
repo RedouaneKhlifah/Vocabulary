@@ -17,7 +17,7 @@ const useUserQuery = () => {
             setLoading(false);
             return result;
         } catch (error) {
-            console.log('Insert Error:', error);
+            console.error('Insert Error:', error);
             setError('Error creating user');
             setLoading(false);
             return null;

@@ -3,9 +3,7 @@ import { CreateUserDto } from "@/Dto/UserDto";
 import { IUser } from "@/interfaces";
 
 const insertOrUpdate = async (user: CreateUserDto): Promise<boolean> => {
-  const { name, howDidYouHear, ageGroup } = user;
-
-  console.log('User: ------------------------ ', user);
+  const { name, howDidYouHear, ageGroup ,gender } = user;
 
   try {
     const db = await getDatabase();
@@ -16,23 +14,18 @@ const insertOrUpdate = async (user: CreateUserDto): Promise<boolean> => {
     ) as IUser | null;
 
     if (existingUser) {
-      console.log('User already exists:', existingUser);
+
       // If the user exists, update the existing record
       await db.runAsync(
-        'UPDATE user SET name = ?, howDidYouHear = ?, ageGroup = ? WHERE id = ?',
-        [name, howDidYouHear, ageGroup, 1]
+        'UPDATE user SET name = ?, howDidYouHear = ?, ageGroup = ? , gender = ? WHERE id = ?',
+        [name, howDidYouHear, ageGroup, gender , 1]
       );
-      const afterUser = await db.getFirstAsync(
-        'SELECT * FROM user'
-      ) as IUser | null;
-
-      console.log('User updated---------------------------:', afterUser);
 
     } else {
       // If the user does not exist, insert the user
       await db.runAsync(
-        'INSERT INTO user (name, howDidYouHear, ageGroup) VALUES (?, ?, ?)',
-        [name, howDidYouHear, ageGroup]
+        'INSERT INTO user (name, howDidYouHear, ageGroup , gender) VALUES (?, ?, ?, ?)',
+        [name, howDidYouHear, ageGroup , gender]
       );
     }
 

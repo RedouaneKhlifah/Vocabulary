@@ -7,7 +7,7 @@ const create = async (user: CreateUserDto) => {
         const result = await UserRepository.insertOrUpdate(user);
         return result;
     } catch (error) {
-        console.log('Insert Error:', error);
+        console.error('Insert Error:', error);
         return null;
     }
 }

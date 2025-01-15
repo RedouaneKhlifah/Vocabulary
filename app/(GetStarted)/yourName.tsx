@@ -3,19 +3,25 @@ import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-nativ
 import { COLORS, SIZES } from '@constants/index';
 import Skip from '@components/utils/Skip';
 import { useRouter } from 'expo-router';
+import useStorage from '@/hooks/useStorage';
+import { IUser } from '@/interfaces';
+import useUserQuery from '@/queries/useUserQuery';
 
 export default function YourName() {
   const [name, setName] = useState('');
   const router = useRouter();
-  const handleContinue = () => {
-    if (name.trim()) {
-    
-    }
+  const {getItem ,removeItem} = useStorage()
+  const {create} = useUserQuery()
+
+  const handleContinue = async () => {
+    const userData = await  getItem("userForm") as IUser
+     const user = {...userData , name : name.trim()}
+     await create(user)
+     await removeItem("userForm")
   };
 
   return (
     <View style={styles.container}>
-      <Skip onPress={() => router.push('yourName')} />
       <Text style={styles.header}>كيف تريد أن يتم مناداتك؟</Text>
       <Text style={styles.subHeader}>يستخدم اسمك لتخصيص تجربتك</Text>
       <View style={styles.contentContainer}>

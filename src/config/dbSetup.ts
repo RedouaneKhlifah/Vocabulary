@@ -5,6 +5,8 @@ const initializeDatabase = async () => {
   try {
     // Open a database (it creates the file if it doesn't exist)
     const db = await SQLite.openDatabaseAsync('VocabularyDb.db');
+    // Drop the table if it exists
+    await db.execAsync(`DROP TABLE IF EXISTS user;`);
 
     // Create table if it doesn't exist
     await db.execAsync(`
@@ -13,6 +15,7 @@ const initializeDatabase = async () => {
         name TEXT,      
         howDidYouHear TEXT,    
         ageGroup TEXT,
+        gender TEXT,
         createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
       );
     `);
