@@ -14,13 +14,12 @@ export default function WhichOptionYou() {
   const data = useMemo(() => [
     { title: 'أنثى', onPress: () => { } },
     { title: 'ذكر', onPress: () => { } },
-    // { title: 'غير ذلك', onPress: () => { } },
     { title: 'أفضل عدم الإفصاح', onPress: () => { } },
   ], []);
 
   return (
     <View style={styles.container}>
-      <Skip onPress={() => router.push('whichOptionYou')} />
+      <Skip onPress={() => router.push('yourName')} />
       <Text style={styles.header}>أي خيار يمثلك بشكل أفضل؟</Text>
       <Text style={styles.subHeader}>اختر خياراً للمتابعة</Text>
       <View style={styles.optionsContainer}>
