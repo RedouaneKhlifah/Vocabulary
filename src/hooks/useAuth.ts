@@ -1,4 +1,3 @@
-// hooks/useAuth.ts
 import { useState, useEffect } from 'react';
 import UserService from "../services/UserService";
 import { IUser } from '../interfaces';
@@ -22,5 +21,5 @@ export function useAuth() {
     checkAuthAndFirstTime();
   }, []);
 
-  return {user, isLoading };
+  return { user, isLoading };
 }
