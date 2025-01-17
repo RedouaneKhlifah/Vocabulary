@@ -29,7 +29,7 @@ const WelcomeScreen = () => {
       gender : "",
     } as IUser)
 
-    router.push('howDidYouHear')
+    router.push('dailyReminders')
   }
   return (
     <SafeAreaView style={styles.container}>
