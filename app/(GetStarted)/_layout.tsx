@@ -9,6 +9,8 @@ export default function RootLayout() {
       <Tabs.Screen name="howOldAreYou" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
       <Tabs.Screen name="whichOptionYou" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
       <Tabs.Screen name="yourName" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
+      <Tabs.Screen name="themeSelector" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
+
     </Tabs>
   );
 }

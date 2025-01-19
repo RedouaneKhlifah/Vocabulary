@@ -15,7 +15,7 @@ export default function YourName() {
 
   return (
     <View style={styles.container}>
-      <Skip onPress={() => router.push('yourName')} />
+      <Skip onPress={() => router.push('themeSelector')} />
       <Text style={styles.header}>كيف تريد أن يتم مناداتك؟</Text>
       <Text style={styles.subHeader}>يستخدم اسمك لتخصيص تجربتك</Text>
       <View style={styles.contentContainer}>
