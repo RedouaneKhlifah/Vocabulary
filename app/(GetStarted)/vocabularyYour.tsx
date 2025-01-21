@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,49 +12,57 @@ import {
 import { COLORS, SIZES, FONTS } from '@constants/index';
 import { useRouter } from 'expo-router';
 import useStorage from '@/hooks/useStorage';
-import HowDidYouHear from './howDidYouHear';
-import { IUser } from '@/interfaces';
 
 const { width, height } = Dimensions.get('window');
 
-const WelcomeScreen = () => {
+const VocabularyYour = () => {
   const router = useRouter();
-  const {saveItem} = useStorage();
+  const [userName, setUserName] = useState('رضوان');
+  const { getItem } = useStorage();
 
-  const handleClick = () => {
-    saveItem("userForm" , {
-      name: "",
-      howDidYouHear : "",
-      ageGroup : "",
-      gender : "",
-    } as IUser)
+  // useEffect(() => {
+  //   const fetchUserName = async () => {
+  //     try {
+  //       const userData = await getItem("userForm");
+  //       if (userData) {
+  //         const parsedData = typeof userData === 'string' ? JSON.parse(userData) : userData;
+  //         setUserName(parsedData.name || '');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching user name:', error);
+  //     }
+  //   };
 
-    router.push('howDidYouHear')
-  }
+  //   fetchUserName();
+  // }, []);
+
+  const handleContinue = async () => {
+
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.imageContainer}>
           <Image
-            source={require('../../assets/abecedaire.jpg')}
+            source={require('../../assets/background.png')}
             style={styles.heroImage}
             resizeMode="contain"
           />
         </View>
 
         <View style={styles.textContainer}>
-          <Text style={styles.title}>طور قاموسك اللغوي في دقيقة في اليوم</Text>
+        <Text style={styles.title}>دعنا نجعل المفردات خاصة بك، {userName}</Text>
           <Text style={styles.subtitle}>
-            تعلم أكثر من 10,000 كلمة جديدة مع عادة يومية جديدة لا تستغرق سوى دقيقة واحدة
+          خصص التطبيق للاستفادة القصوى من تجربتك
           </Text>
         </View>
 
         <TouchableOpacity
           style={styles.startButton}
-          onPress={handleClick}
+          onPress={handleContinue}
           activeOpacity={0.8}
         >
-          <Text style={styles.buttonText}>هيا نبدأ</Text>
+          <Text style={styles.buttonText}>متابعة</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -65,6 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.primary,
+
   },
   content: {
     flex: 1,
@@ -72,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   imageContainer: {
-    height: height * 0.4,
+    height: height * 0.48,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: Platform.OS === 'ios' ? 20 : 0,
@@ -124,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+export default VocabularyYour;

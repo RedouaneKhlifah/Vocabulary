@@ -95,25 +95,25 @@ const TimeRangeSelector: React.FC<TimeRangeSelectorProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.timeRow}>
-        <Text style={styles.label}>Start at</Text>
         <TouchableOpacity 
           style={styles.timeBox}
           onPress={toggleStartPicker}
         >
           <Text style={styles.timeText}>{formattedStartTime}</Text>
         </TouchableOpacity>
+        <Text style={styles.label}>تبدأ عند</Text>
       </View>
 
       <Divider color={COLORS.white}/>
 
       <View style={styles.timeRow}>
-        <Text style={styles.label}>End at</Text>
         <TouchableOpacity 
           style={styles.timeBox}
           onPress={toggleEndPicker}
         >
           <Text style={styles.timeText}>{formattedEndTime}</Text>
         </TouchableOpacity>
+        <Text style={styles.label}>تنتهي عند</Text>
       </View>
 
       {isStartPickerVisible && (
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   timeBox: {
-    backgroundColor: '#2C2C2E',
+    backgroundColor: COLORS.brown,
     padding: 8,
     borderRadius: 8,
     minWidth: 70,

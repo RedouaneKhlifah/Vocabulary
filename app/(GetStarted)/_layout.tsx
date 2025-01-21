@@ -11,6 +11,7 @@ export default function RootLayout() {
       <Tabs.Screen name="yourName" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
       <Tabs.Screen name="themeSelector" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
       <Tabs.Screen name="dailyReminders" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
+      <Tabs.Screen name="vocabularyYour" options={{ headerShown: false ,tabBarStyle: { display: 'none' } }} />
     </Tabs>
   );
 }

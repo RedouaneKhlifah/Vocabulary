@@ -23,6 +23,7 @@ export default function DailyReminders() {
     //  const user = {...userData , name : name.trim()}
     //  await create(user)
     //  await removeItem("userForm")
+    router.push('vocabularyYour')
   };
 
   return (
@@ -96,29 +97,29 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: 30,
     height: 30,
-    borderRadius: SIZES.roundedFull,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.white,
   },
   logoText : {
     fontWeight: "900",
     fontSize: 20,
-    color: COLORS.white,
+    color: COLORS.black,
     paddingBottom: 5,
   },
   notification: {
     width: '90%',
     borderRadius: 10,
     padding: 20,
-    backgroundColor: COLORS.gray,
+    backgroundColor: COLORS.lightBrown,
   },
 
   timeRangeSelectorContainer: {
     width: '90%',
     borderRadius: 10,
     paddingBlock: 20,
-    backgroundColor: COLORS.gray,
+    backgroundColor: COLORS.lightBrown,
 
   },
   notificationHeader :{flexDirection: 'row', justifyContent: 'space-between'},
