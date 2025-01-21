@@ -5,17 +5,26 @@ import { Option } from "@components/howDidYouHear";
 import { ListRenderer } from "@components/utils";
 import Skip from '@components/utils/Skip';
 import { useRouter } from 'expo-router';
+import useStorage from '@/hooks/useStorage';
+import { IUser } from '@/interfaces';
 
 
 
 export default function WhichOptionYou() {
   const router = useRouter();
-
+  const {getItem , saveItem} = useStorage()
+  
   const data = useMemo(() => [
-    { title: 'أنثى', onPress: () => { } },
-    { title: 'ذكر', onPress: () => { } },
-    { title: 'أفضل عدم الإفصاح', onPress: () => { } },
+    { title: 'أنثى', value : 'female'},
+    { title: 'ذكر', value : 'male'},
+    { title: 'أفضل عدم الإفصاح', value: 'other' },
   ], []);
+
+  const handlePress = async (value: string) => {
+    const userData = await getItem("userForm") as IUser
+    saveItem("userForm" , {...userData , gender : value} as IUser)
+    router.push('yourName');
+  };
 
   return (
     <View style={styles.container}>
@@ -24,7 +33,7 @@ export default function WhichOptionYou() {
       <Text style={styles.subHeader}>اختر خياراً للمتابعة</Text>
       <View style={styles.optionsContainer}>
         {data.map((item, index) => (
-          <Option key={index} title={item.title} onPress={item.onPress} />
+          <Option key={index} title={item.title} onPress={() => handlePress(item.value)} />
         ))}
       </View>
     </View>

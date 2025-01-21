@@ -1,15 +1,56 @@
-import db from "../config/db";
+import getDatabase from "@/config/db";
+import { CreateUserDto } from "@/Dto/UserDto";
+import { IUser } from "@/interfaces";
 
-// Prepare the statement for inserting data into the test table
-const insert = await db.prepareAsync(
-  'INSERT INTO user (name, howDidYouHear, ageGroup) VALUES ($name, $howDidYouHear, $ageGroup)'
-);
+const insertOrUpdate = async (user: CreateUserDto): Promise<boolean> => {
+  const { name, howDidYouHear, ageGroup ,gender } = user;
 
-const get = await db.prepareAsync('SELECT * FROM user LIMIT 1');
+  try {
+    const db = await getDatabase();
 
-const UserRepository = {
-    insert,
-    get
+    // Check if the user already exists (there should only be one user in the database)
+    const existingUser = await db.getFirstAsync(
+      'SELECT * FROM user where id = 1'
+    ) as IUser | null;
+
+    if (existingUser) {
+
+      // If the user exists, update the existing record
+      await db.runAsync(
+        'UPDATE user SET name = ?, howDidYouHear = ?, ageGroup = ? , gender = ? WHERE id = ?',
+        [name, howDidYouHear, ageGroup, gender , 1]
+      );
+
+    } else {
+      // If the user does not exist, insert the user
+      await db.runAsync(
+        'INSERT INTO user (name, howDidYouHear, ageGroup , gender) VALUES (?, ?, ?, ?)',
+        [name, howDidYouHear, ageGroup , gender]
+      );
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Database Insert/Update Error:', error);
+    return false;
+  }
 };
 
-export default UserRepository
+
+
+const get = async (): Promise<IUser | null> => {
+  try {
+    const db = await getDatabase()
+    return await db.getFirstAsync('SELECT * FROM user where id = 1') as IUser | null;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw error;
+  }
+};
+
+const UserRepository = {
+  insertOrUpdate,
+  get,
+};
+
+export default UserRepository;

@@ -11,12 +11,26 @@ import {
 } from 'react-native';
 import { COLORS, SIZES, FONTS } from '@constants/index';
 import { useRouter } from 'expo-router';
+import useStorage from '@/hooks/useStorage';
+import HowDidYouHear from './howDidYouHear';
+import { IUser } from '@/interfaces';
 
 const { width, height } = Dimensions.get('window');
 
 const WelcomeScreen = () => {
   const router = useRouter();
+  const {saveItem} = useStorage();
 
+  const handleClick = () => {
+    saveItem("userForm" , {
+      name: "",
+      howDidYouHear : "",
+      ageGroup : "",
+      gender : "",
+    } as IUser)
+
+    router.push('dailyReminders')
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -37,7 +51,7 @@ const WelcomeScreen = () => {
 
         <TouchableOpacity
           style={styles.startButton}
-          onPress={() => router.push('howDidYouHear')}
+          onPress={handleClick}
           activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>هيا نبدأ</Text>

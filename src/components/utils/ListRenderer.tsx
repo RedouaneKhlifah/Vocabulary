@@ -11,7 +11,6 @@ const ListRenderer = <T,>({
   data,
   renderItem,
 }: ListRendererProps<T>) => {
-  console.log(data);
   return (
     <>
       {data.map((item, index) => (

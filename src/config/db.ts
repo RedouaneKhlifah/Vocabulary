@@ -1,6 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 
-// Open a database (it creates the file if it doesn't exist)
-const db = SQLite.openDatabaseSync('Vocabulary.db');
+// Centralize the database connection logic
+const getDatabase = async () => {
+  return SQLite.openDatabaseAsync('VocabularyDb.db');
+};
 
-export default db;
+export default getDatabase;

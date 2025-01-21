@@ -2,23 +2,32 @@ import React, { useMemo } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import {COLORS , FONTS, SIZES} from "@constants/index";
 import {Option} from "@components/howDidYouHear";
-import {ListRenderer} from "@components/utils";
 import Skip from '@components/utils/Skip';
 import { useRouter } from 'expo-router';
+import useStorage from '@/hooks/useStorage';
+import { IUser } from '@/interfaces';
 
 
 
 export default function HowDidYouHear() {
     const router = useRouter();
+    const {getItem , saveItem} = useStorage()
     const data = useMemo(() => [
-      { title: 'تيك توك', onPress: () => {} },
-      { title: 'إنستغرام', onPress: () => {} },
-      { title: 'فيسبوك', onPress: () => {} },
-      { title: 'جوجل بلاي', onPress: () => {} },
-      { title: 'البحث على الويب', onPress: () => {} },
-      { title: 'صديق/عائلة', onPress: () => {} },
-      { title: 'آخر', onPress: () => {} },
+      { title: 'تيك توك', value : 'tiktok'},
+      { title: 'إنستغرام', value : 'instagram'},
+      { title: 'فيسبوك', value : 'facebook'},
+      { title: 'جوجل بلاي', value : 'google'},
+      { title: 'البحث على الويب', value : 'web'},
+      { title: 'صديق/عائلة', value : 'friends/family'},
+      { title: 'آخر', value : 'other'},
     ], []);
+
+
+    const handlePress = async (value: string) => {
+      const userData = await getItem("userForm") as IUser
+      saveItem("userForm" , {...userData , howDidYouHear : value} as IUser)
+      router.push('howOldAreYou');
+    };
 
   return (
     <View style={styles.container}>
@@ -27,7 +36,7 @@ export default function HowDidYouHear() {
         <Text style = {styles.subHeader}>حدد خيارًا للمتابعة</Text>
         <View style={styles.optionsContainer}>
             {data.map((item, index) => (
-                <Option key={index} title={item.title} onPress={item.onPress} />
+                <Option key={index} title={item.title} onPress={() => handlePress(item.value)} />
             ))}
         </View>
 

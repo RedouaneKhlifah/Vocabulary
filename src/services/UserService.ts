@@ -1,39 +1,31 @@
 
 import UserRepository from '../repositories/UserRepository';
 import { IUser } from '../interfaces';
-const create = async (user: IUser) => {
-    const { name, howDidYouHear, ageGroup } = user
-
+import { CreateUserDto } from '@/Dto/UserDto';
+const create = async (user: CreateUserDto) => {
     try {
-        const result = await UserRepository.insert.executeAsync({
-            $name: name,
-            $howDidYouHear: howDidYouHear,
-            $ageGroup: ageGroup
-        });
+        const result = await UserRepository.insertOrUpdate(user);
         return result;
     } catch (error) {
-        console.log('Insert Error:', error);
+        console.error('Insert Error:', error);
         return null;
     }
 }
 
 
 
-const getUser = async () : Promise<IUser | null> => {
+export const getUser = async (): Promise<IUser | null> => {
     try {
-        const result = await UserRepository.get.executeAsync() as unknown as IUser[];
-        const user = result[0];
-        if(!user) {
-            return null;
-        }
-        return user;
-        
-    } catch (error) {
-        console.log('Insert Error:', error);
+      const result = await UserRepository.get();
+      if (!result) {
         return null;
+      }
+      return result;
+    } catch (error) {
+      console.error('Insert Error:', error);
+      return null;
     }
-}
-
+  };
  const  UserService = {
     create,
     getUser,
