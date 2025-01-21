@@ -18,6 +18,7 @@ export default function YourName() {
      const user = {...userData , name : name.trim()}
      await create(user)
      await removeItem("userForm")
+      router.push('dailyReminders')
   };
 
   return (
